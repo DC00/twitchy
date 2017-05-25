@@ -1,4 +1,4 @@
-import requests, json, os, time
+import requests, json, os, time, sys
 
 API_URL = 'https://rechat.twitch.tv/rechat-messages'
 BE_NICE = 0
@@ -48,7 +48,8 @@ def download_chat_log(video_id):
     fw = open('../logs/' + str(video_id) + '-chatlog.txt', 'w')
 
     messages = []
-
+    
+    begin_time = time.time()
     while current <= end:
         response = requests.get(make_request(current, video_id)).json()
 
@@ -59,8 +60,13 @@ def download_chat_log(video_id):
                 fw.write(json.dumps(msg, indent=4, sort_keys=True))
 
         current += 30
+        progress = round(float((current - start) / (end - start)) * 100, 2)
+        sys.stdout.write("Progess: " + str(progress) + "%\r")
+        sys.stdout.flush()
         time.sleep(BE_NICE)
 
+    fw.close()
+    print("Downloaded chat replay for v" + str(video_id) + " in " + str(int(time.time() - begin_time)) + "s")
     
 
 

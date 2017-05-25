@@ -1,8 +1,7 @@
-import "lib.py"
-
-OATH=""
-CLIENT_ID=""
-CLIENT_SECRET=""
+from lib import *
+import json
 
 if __name__ == '__main__':
-    with open('credentials.json')
+    with open('credentials.json', 'r') as f:
+        credentials = json.load(f)
+    download_chat_log(137742888)

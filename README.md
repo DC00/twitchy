@@ -1,5 +1,4 @@
 # Twitchy
-<br/>
 
 ### Example Usage
 

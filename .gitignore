@@ -1,4 +1,4 @@
 src/credentials.json
-src/logs/*
+logs/*
 src/*.pyc
 src/__pycache__
